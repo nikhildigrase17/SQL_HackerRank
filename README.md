@@ -238,3 +238,46 @@ My Solution(MySQL):
 ```
 #### Q29.We define an employee's total earnings to be their monthly worked, and the maximum total earnings to be the maximum total earnings for any employee in the Employee table. Write a query to find the maximum total earnings for all employees as well as the total number of employees who have maximum total earnings. Then print these values as space-separated integers.
 The Employee table containing employee data for a company is described as follows:
+
+![S](https://github.com/nikhildigrase17/SQL_HackerRank/assets/152486401/0a631d5d-639d-4a86-a4ff-fdb32406448a)
+
+My Solution(MySQL):
+```
+  SELECT 
+  MAX(MONTHS * SALARY) AS EARNINGS,
+  COUNT(*)
+  FROM EMPLOYEE
+  WHERE MONTHS * SALARY = (SELECT MAX(MONTHS * SALARY) FROM EMPLOYEE)
+```
+#### Q30.Query the following two values from the STATION table:
+1.The sum of all values in LAT_N rounded to a scale of 2 decimal places.
+
+2.The sum of all values in LONG_W rounded to a scale of 2 decimal places.
+
+The STATION table is described as follows:
+
+![J](https://github.com/nikhildigrase17/SQL_HackerRank/assets/152486401/e1d0a48f-2383-4b94-8d63-d204a9d7fff5)
+
+My Solution(MySQL):
+```
+  SELECT
+  ROUND(SUM(LAT_N),2) AS LAT,
+  ROUND(SUM(LONG_W),2) AS LON
+  FROM STATION;
+```
+#### Q31.Query the sum of Northern Latitudes (LAT_N) from STATION having values greater than 38.7880 and less than 137.2345. Truncate your answer to 4 decimal places.
+My Solution(MySQL):
+```
+  SELECT
+  TRUNCATE(SUM(LAT_N),4)
+  FROM STATION
+  WHERE LAT_N > 38.7880 AND LAT_N < 137.2345;
+```
+#### Q31.Query the greatest value of the Northern Latitudes (LAT_N) from STATION that is less than 137.2345. Truncate your answer to 4 decimal places.
+My Solution(MySQL):
+```
+  SELECT
+  TRUNCATE(MAX(LAT_N),4)
+  FROM STATION
+  WHERE LAT_N < 137.2345;
+```
