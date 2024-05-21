@@ -104,3 +104,31 @@ My Solution(MySQL):
   FROM STATION
   WHERE CITY REGEXP '[A,E,I,OU,]$';
 ```
+#### Q14.Query the list of CITY names from STATION which have vowels (i.e., a, e, i, o, and u) as both their first and last characters. Your result cannot contain duplicates.
+My Solution(MySQL):
+```
+  SELECT DISTINCT CITY
+  FROM STATION
+  WHERE CITY REGEXP '^[A,E,I,O,U].*[A,E,I,O,U]$';
+```
+#### Q15.Query the list of CITY names from STATION that do not start with vowels. Your result cannot contain duplicates.
+My Solution(MySQL):
+```
+  SELECT DISTINCT CITY
+  FROM STATION
+  WHERE CITY NOT REGEXP '^[A,E,I,O,U]';
+```
+#### Q16.Query the list of CITY names from STATION that do not end with vowels. Your result cannot contain duplicates.
+My Solution(MySQL):
+```
+  SELECT DISTINCT CITY
+  FROM STATION
+  WHERE CITY NOT REGEXP '[A,E,I,O,U]$';
+```
+#### Q16.Query the list of CITY names from STATION that either do not start with vowels or do not end with vowels. Your result cannot contain duplicates.
+My Solution(MySQL):
+```
+  SELECT DISTINCT CITY
+  FROM STATION
+  WHERE CITY NOT REGEXP '^[A,E,I,O,U].*[A,E,I,O,U]$';
+```
