@@ -4,3 +4,4 @@
 ## **BASIC SELECT -**
 
 ### Q1.Query all columns (attributes) for every row in the CITY table.
+The City Table is described as follows:
