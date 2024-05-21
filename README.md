@@ -273,11 +273,119 @@ My Solution(MySQL):
   FROM STATION
   WHERE LAT_N > 38.7880 AND LAT_N < 137.2345;
 ```
-#### Q31.Query the greatest value of the Northern Latitudes (LAT_N) from STATION that is less than 137.2345. Truncate your answer to 4 decimal places.
+#### Q32.Query the greatest value of the Northern Latitudes (LAT_N) from STATION that is less than 137.2345. Truncate your answer to 4 decimal places.
 My Solution(MySQL):
 ```
   SELECT
   TRUNCATE(MAX(LAT_N),4)
   FROM STATION
   WHERE LAT_N < 137.2345;
+```
+#### Q33.Query the Western Longitude (LONG_W) for the largest Northern Latitude (LAT_N) in STATION that is less than 137.2345. Round your answer to 4 decimal places.
+My Solution(MySQL):
+```
+  SELECT
+  ROUND(LONG_W,4)
+  FROM STATION
+  WHERE LAT_N = (SELECT MAX(LAT_N) FROM STATION WHERE LAT_N < 137.2345);
+```
+#### Q34.Query the smallest Northern Latitude (LAT_N) from STATION that is greater than 38.7780. Round your answer to 4 decimal places.
+My Solution(MySQL):
+```
+  SELECT 
+  ROUND(MIN(LAT_N),4)
+  FROM STATION
+  WHERE LAT_N > 38.7780;
+```
+#### Q35.Query the Western Longitude (LONG_W)where the smallest Northern Latitude (LAT_N) in STATION is greater than 38.7780. Round your answer to 4 decimal places.
+My Solution(MySQL):
+```
+  SELECT
+  ROUND(LONG_W,4)
+  FROM STATION
+  WHERE LAT_N = (SELECT MIN(LAT_N) FROM STATION WHERE LAT_N > 38.7780);
+```
+#### Q36.Consider P1(a,b) and P2(c,d) to be two points on a 2D plane.
+a happens to equal the minimum value in Northern Latitude (LAT_N in STATION).
+
+b happens to equal the minimum value in Western Longitude (LONG_W in STATION).
+
+c happens to equal the maximum value in Northern Latitude (LAT_N in STATION).
+
+d happens to equal the maximum value in Western Longitude (LONG_W in STATION). Query the Manhattan Distance between points P1 and P2 and round it to a scale of 4 decimal places.
+My Solution(MySQL):
+```
+  SELECT 
+  ROUND((MAX(LAT_N)-MIN(LAT_N)) + (MAX(LONG_W)-MIN(LONG_W)),4) AS Distance 
+  FROM STATION;
+```
+#### Q37.Consider P1(a,c) and P2(b,d) to be two points on a 2D plane where (a,b) are the respective minimum and maximum values of Northern Latitude (LAT_N) and (c,d) are the respective minimum and maximum values of Western Longitude (LONG_W) in STATION.
+Query the Euclidean Distance between points P1 and P2 and format your answer to display 4 decimal digits.
+My Solution(MySQL):
+```
+  SELECT
+  ROUND(SQRT(POWER(MAX(LAT_N)-MIN(LAT_N),2) + POWER(MAX(LONG_W)-MIN(LONG_W),2)),4)
+  FROM STATION;
+```
+#### Q38.A median is defined as a number separating the higher half of a data set from the lower half. Query the median of the Northern Latitudes (LAT_N) from STATION and round your answer to 4 decimal places.
+My Solution(MySQL):
+```
+  SELECT CAST(ROUND(AVG(LAT_N),4) AS DECIMAL(10,4))
+  FROM (SELECT LAT_N, ROW_NUMBER() OVER(ORDER BY LAT_N) AS RowNumber, 
+  COUNT(*) OVER() AS TotalRows FROM STATION) AS temp 
+  WHERE RowNumber IN ((TotalRows + 1) / 2, (TotalRows + 2) / 2);
+```
+## **Basic Join -**
+
+#### Q39.Given the CITY and COUNTRY tables, query the sum of the populations of all cities where the CONTINENT is 'Asia'.
+Note: CITY.CountryCode and COUNTRY.Code are matching key columns.
+
+The CITY and COUNTRY tables are described as follows:
+
+![C](https://github.com/nikhildigrase17/SQL_HackerRank/assets/152486401/5ab008f0-4658-4503-bbd2-556b198a4132)
+
+![B](https://github.com/nikhildigrase17/SQL_HackerRank/assets/152486401/facb983b-7242-4151-9aef-ea40574ab930)
+
+My Solution(MySQL):
+```
+  SELECT
+  SUM(C.POPULATION)
+  FROM CITY AS C
+  INNER JOIN COUNTRY AS CT
+  ON C.COUNTRYCODE = CT.CODE
+  WHERE CONTINENT = 'ASIA';
+```
+#### Q40.Given the CITY and COUNTRY tables, query the names of all cities where the CONTINENT is 'Africa'.
+Note: CITY.CountryCode and COUNTRY.Code are matching key columns.
+My Solution(MySQL):
+```
+  SELECT
+  C.NAME
+  FROM CITY AS C
+  INNER JOIN COUNTRY AS CT
+  ON C.COUNTRYCODE = CT.CODE
+  WHERE CONTINENT  = 'AFRICA';
+```
+#### Q41.Given the CITY and COUNTRY tables, query the names of all the continents (COUNTRY.Continent) and their respective average city populations (CITY.Population) rounded down to the nearest integer.
+Note: CITY.CountryCode and COUNTRY.Code are matching key columns.
+My Solution(MySQL):
+```
+  SELECT
+  CT.CONTINENT,
+  FLOOR(AVG(C.POPULATION))
+  FROM COUNTRY AS CT
+  INNER JOIN CITY AS C
+  ON C.COUNTRYCODE = CT.CODE
+  GROUP BY CT.CONTINENT;
+```
+#### Q41.Query a count of the number of cities in CITY having a Population larger than 100000.
+My Solution(MySQL):
+```
+  SELECT
+  CT.CONTINENT,
+  FLOOR(AVG(C.POPULATION))
+  FROM COUNTRY AS CT
+  INNER JOIN CITY AS C
+  ON C.COUNTRYCODE = CT.CODE
+  GROUP BY CT.CONTINENT;
 ```
