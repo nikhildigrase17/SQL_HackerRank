@@ -125,10 +125,31 @@ My Solution(MySQL):
   FROM STATION
   WHERE CITY NOT REGEXP '[A,E,I,O,U]$';
 ```
-#### Q16.Query the list of CITY names from STATION that either do not start with vowels or do not end with vowels. Your result cannot contain duplicates.
+#### Q17.Query the list of CITY names from STATION that either do not start with vowels or do not end with vowels. Your result cannot contain duplicates.
 My Solution(MySQL):
 ```
   SELECT DISTINCT CITY
   FROM STATION
   WHERE CITY NOT REGEXP '^[A,E,I,O,U].*[A,E,I,O,U]$';
+```
+#### Q18.Query the list of CITY names from STATION that either do not start with vowels and do not end with vowels. Your result cannot contain duplicates.
+My Solution(MySQL):
+```
+  SELECT DISTINCT CITY
+  FROM STATION
+  WHERE CITY NOT REGEXP '^[A,E,I,O,U]'
+  AND CITY NOT REGEXP '[A,E,I,O,U]$';
+```
+
+#### Q19.Query the Name of any student in STUDENTS who scored higher than Marks. Order your output by the last three characters of each name. If two or more students both have names ending in the same last three characters (i.e.: Bobby, Robby, etc.), secondary sort them by ascending ID.
+The STUDENTS table is described as follows:
+
+![V](https://github.com/nikhildigrase17/SQL_HackerRank/assets/152486401/f4c7b488-40cf-4453-89af-fcc1b943f2a6)
+
+My Solution(MySQL):
+```
+  SELECT NAME
+  FROM STUDENTS
+  WHERE MARKS > 75
+  ORDER BY RIGHT(NAME,3),ID;
 ```
