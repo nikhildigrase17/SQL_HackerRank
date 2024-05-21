@@ -185,3 +185,54 @@ My Solution(MySQL):
   FROM CITY
   WHERE POPULATION > 100000;
 ```
+#### Q23.Query the total population of all cities in CITY where District is California.
+My Solution(MySQL):
+```
+  SELECT  
+  SUM(POPULATION) AS TOTAL_POPULATION
+  FROM CITY
+  WHERE DISTRICT = 'CALIFORNIA';
+```
+#### Q24. Query the average population of all cities in CITY where District is California.
+My Solution(MySQL):
+```
+  SELECT  
+  AVG(POPULATION) AS TOTAL_POPULATION
+  FROM CITY
+  WHERE DISTRICT = 'CALIFORNIA';
+```
+#### Q25. Query the average population for all cities in CITY, rounded down to the nearest integer.
+My Solution(MySQL):
+```
+  SELECT
+  ROUND(AVG(POPULATION),0) AS AVERAGE_POPULATION
+  FROM CITY;
+```
+#### Q26. Query the sum of the populations for all Japanese cities in CITY. The COUNTRYCODE for Japan is JPN.
+My Solution(MySQL):
+```
+  SELECT
+  SUM(POPULATION) AS JAPANESE_POPULATION
+  FROM CITY
+  WHERE COUNTRYCODE = 'JPN';
+```
+#### Q27.Query the difference between the maximum and minimum populations in CITY.
+My Solution(MySQL):
+```
+  SELECT 
+  MAX(POPULATION) - MIN(POPULATION) AS DIFFRENCE
+  FROM CITY;
+```
+#### Q27.Samantha was tasked with calculating the average monthly salaries for all employees in the EMPLOYEES table, but did not realize her keyboard's key was broken until after completing the calculation. She wants your help finding the difference between her miscalculation (using salaries with any zeros removed), and the actual average salary.
+Write a query calculating the amount of error (i.e.: actual - miscalculated average monthly salaries), and round it up to the next integer.
+
+The EMPLOYEES table is described as follows:
+
+![M](https://github.com/nikhildigrase17/SQL_HackerRank/assets/152486401/2cb688e4-7668-4076-92b0-11e332f3ee31)
+
+My Solution(MySQL):
+```
+   SELECT
+   ROUND(AVG(SALARY)) - ROUND(AVG(REPLACE(SALARY, 0 , "")))
+  FROM EMPLOYEES;
+```
