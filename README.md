@@ -164,3 +164,24 @@ My Solution(MySQL):
   FROM EMPLOYEE
   ORDER BY NAME ASC;
 ```
+#### Q21.Write a query that prints a list of employee names (i.e.: the name attribute) for employees in Employee having a salary greater than $2000 per month who have been employees for less than 10 months. Sort your result by ascending employee_id.
+My Solution(MySQL):
+```
+  SELECT NAME
+  FROM EMPLOYEE
+  WHERE SALARY > 2000 AND MONTHS < 10
+  ORDER BY EMPLOYEE_ID ASC;
+```
+## **AGGREGATION FUNCTION -**
+
+#### Q22.Query a count of the number of cities in CITY having a Population larger than 1000000.
+The CITY table is described as follows:
+
+![BA](https://github.com/nikhildigrase17/SQL_HackerRank/assets/152486401/e2f5d465-e347-4731-b873-c63e6e925339)
+
+My Solution(MySQL):
+```
+  SELECT COUNT(ID)
+  FROM CITY
+  WHERE POPULATION > 100000;
+```
