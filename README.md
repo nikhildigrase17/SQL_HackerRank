@@ -153,3 +153,14 @@ My Solution(MySQL):
   WHERE MARKS > 75
   ORDER BY RIGHT(NAME,3),ID;
 ```
+#### Q20.Write a query that prints a list of employee names (i.e.: the name attribute) from the Employee table in alphabetical order.
+The Employee table containing employee data for a company is described as follows:
+
+![BB](https://github.com/nikhildigrase17/SQL_HackerRank/assets/152486401/73effc55-3c12-4150-9534-7c6af800f2b4)
+
+My Solution(MySQL):
+```
+  SELECT NAME
+  FROM EMPLOYEE
+  ORDER BY NAME ASC;
+```
