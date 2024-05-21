@@ -1,3 +1,3 @@
 # **SQL Hacker Rank Question**
 
-## BASIC SELECT -
+## **BASIC SELECT -**
