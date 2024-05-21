@@ -1,1 +1,1 @@
-# SQL_HackerRank
+# **SQL Hacker Rank Question**
