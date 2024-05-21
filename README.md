@@ -10,5 +10,6 @@ The City Table is described as follows:
 
 
 My Solution:
-
+```
    > SELECT * FROM CITY;
+```
