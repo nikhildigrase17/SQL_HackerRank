@@ -389,7 +389,7 @@ My Solution(MySQL):
   ON C.COUNTRYCODE = CT.CODE
   GROUP BY CT.CONTINENT;
 ```
-#### Write a query identifying the type of each record in the TRIANGLES table using its three side lengths. Output one of the following statements for each record in the table:
+#### Q42.Write a query identifying the type of each record in the TRIANGLES table using its three side lengths. Output one of the following statements for each record in the table:
 
 Equilateral: It's a triangle with  sides of equal length.
 Isosceles: It's a triangle with  sides of equal length.
@@ -405,4 +405,31 @@ My Solution(MySQL):
   ELSE 'Scalene'
   END
   FROM TRIANGLES;
+```
+#### Q43.Samantha interviews many candidates from different colleges using coding challenges and contests. Write a query to print the contest_id, hacker_id, name, and the sums of total_submissions, total_accepted_submissions, total_views, and total_unique_views for each contest sorted by contest_id. Exclude the contest from the result if all four sums are .
+My Solution(MySQL):
+```
+  SELECT A.CONTEST_ID, A.HACKER_ID, A.NAME, 
+        SUM(TOTAL_SUBMISSIONS) AS TOTAL_SUBMISSIONS, 
+        SUM(TOTAL_ACCEPTED_SUBMISSIONS) AS TOTAL_ACCEPTED_SUBMISSIONS,
+        SUM(TOTAL_VIEWS) AS TOTAL_VIEWS,
+        SUM(TOTAL_UNIQUE_VIEWS) AS TOTAL_UNIQUE_VIEWS
+FROM CONTESTS AS A
+LEFT JOIN COLLEGES AS B
+    ON A.CONTEST_ID = B.CONTEST_ID
+LEFT JOIN CHALLENGES AS C
+    ON B.COLLEGE_ID = C.COLLEGE_ID 
+LEFT JOIN (SELECT CHALLENGE_ID, SUM(TOTAL_VIEWS) AS TOTAL_VIEWS, 
+                  SUM(TOTAL_UNIQUE_VIEWS) AS TOTAL_UNIQUE_VIEWS
+           FROM VIEW_STATS
+           GROUP BY CHALLENGE_ID) AS D 
+    ON C.CHALLENGE_ID = D.CHALLENGE_ID 
+LEFT JOIN (SELECT CHALLENGE_ID, SUM(TOTAL_SUBMISSIONS) AS TOTAL_SUBMISSIONS, 
+                  SUM(TOTAL_ACCEPTED_SUBMISSIONS) AS TOTAL_ACCEPTED_SUBMISSIONS
+           FROM SUBMISSION_STATS
+           GROUP BY CHALLENGE_ID) AS E
+    ON C.CHALLENGE_ID = E.CHALLENGE_ID
+GROUP BY A.CONTEST_ID, A.HACKER_ID, A.NAME
+HAVING (TOTAL_SUBMISSIONS + TOTAL_ACCEPTED_SUBMISSIONS + TOTAL_VIEWS + TOTAL_UNIQUE_VIEWS) > 0 
+ORDER BY A.CONTEST_ID;
 ```
